@@ -1,0 +1,31 @@
+<div [ngClass]="{alert:true, error:show, success:!show}" >
+<h2>{{message}}</h2>
+</div>
+<h2>{{email}}</h2>
+<ul>
+  <li *ngFor="let student of learners">
+    {{student.age}} -- {{student.name}}
+  </li>
+</ul>
+<div>
+  <input type="text" #newL (keydown.enter)="learners.push({name: newL.value})">
+  <input [(ngModel)]="search" type="text" placeholder="Busca tu Ri..">
+  <h2 *ngFor ="let student of learners | filter:'name': search" (click)="tachar($event)">
+       {{student.name | capitalize}}
+  </h2>
+</div>
+<section class="container">
+  <br>
+  <div class="card">
+    <input *ngIf="show" #username type="text" placeholder="Tu nombre de usuario" [value]="userName" (keydown)="onKeyDown(username)">
+    <br>
+    <input type="text" placeholder="Tu email" [(ngModel)]="form.email">
+    <br>
+    <input type="password" #pass placeholder="Tu contraseña" (keyup)="toggleError(pass, alert)" [(ngModel)]="form.password">
+    <input type="checkbox" #check (click)="togglePass(pass, check)"> show password
+    <br>
+    <button (click)="testing()">Login</button>
+  </div>
+
+
+</section>
